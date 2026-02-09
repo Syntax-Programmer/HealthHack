@@ -1,0 +1,12 @@
+id,med_name,condition_trigger,risk_level,warning_text,helpline_required
+1,Dolo 650,Liver Disease,Red,Fatal liver damage risk. Do not take.,1
+2,Vicks Action 500,High BP,Red,Phenylephrine causes sudden BP spikes.,1
+3,Combiflam,Asthma,Yellow,NSAIDs can trigger breathing attacks.,0
+4,Combiflam,Stomach Ulcer,Red,Extreme risk of gastric bleeding.,1
+5,Avil,Driving,Yellow,Causes severe sedation. Risk of accidents.,0
+6,Digene,Kidney Issues,Yellow,Mineral buildup can strain kidneys.,0
+7,Otrivin Nasal,Heart Disease,Red,Can cause dangerous heart racing.,1
+8,Aspirin (Bayer),Blood Thinners,Red,Severe internal bleeding risk.,1
+9,Loperamide (Imodium),Bloody Stool,Red,May mask serious bacterial infection.,1
+10,Saridon,Anxiety,Yellow,Caffeine content can trigger panic attacks.,0
+11,Meftal-Spas,Glaucoma,Red,Can dangerously increase eye pressure.,1

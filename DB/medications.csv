@@ -1,0 +1,82 @@
+id,name,ingredients,category,general_side_effects
+1,Dolo 650,Paracetamol,Pain & Fever,"Nausea, skin rash"
+2,Crocin Pain Relief,"Paracetamol, Caffeine",Pain & Fever,"Insomnia, jitteriness"
+3,Combiflam,"Ibuprofen, Paracetamol",Pain & Fever,"Stomach upset, acidity"
+4,Saridon,"Paracetamol, Propyphenazone, Caffeine",Headache,Rapid heart rate
+5,Aspirin (Bayer),Acetylsalicylic Acid,Pain & Fever,"Heartburn, bleeding"
+6,Voveran SR,Diclofenac,Painkiller,"Dizziness, bloating"
+7,Meftal-Spas,"Mefenamic Acid, Dicyclomine",Spasm Relief,"Dry mouth, blurred vision"
+8,Zerodol P,"Aceclofenac, Paracetamol",Painkiller,Drowsiness
+9,Naprosyn,Naproxen,NSAID,Stomach cramps
+10,Dart,"Paracetamol, Caffeine",Headache,Restlessness
+11,Sumo,"Nimesulide, Paracetamol",Painkiller,Liver enzyme changes
+12,Anacin,"Aspirin, Caffeine",Headache,Acidity
+13,Ultracet,"Tramadol, Acetaminophen",Severe Pain,"Drowsiness, constipation"
+14,Flexon,"Ibuprofen, Paracetamol",Muscle Pain,Stomach irritation
+15,Piroxicam,Piroxicam,Joint Pain,Dizziness
+16,Vicks Action 500,"Paracetamol, Phenylephrine",Cold & Flu,Increased BP
+17,Benadryl Cough,Diphenhydramine,Cough,Heavy sedation
+18,Ascoril D,Dextromethorphan,Dry Cough,Dizziness
+19,Grilinctus,"Dextromethorphan, Chlorpheniramine",Cough,Sleepiness
+20,Alex Syrup,"Dextromethorphan, Guaphenesin",Cough,Nausea
+21,Cheston Cold,"Cetirizine, Phenylephrine",Cold,Dry mouth
+22,Solvin Cold,"Paracetamol, Chlorpheniramine",Cold,Fatigue
+23,Mucinex,Guaifenesin,Chest Congestion,Headache
+24,Robitussin,Dextromethorphan,Cough suppressant,Drowsiness
+25,Sinarest,"Paracetamol, Chlorpheniramine",Cold,Sleepiness
+26,Tussadryl,Diphenhydramine,Cough,Dryness
+27,Corex,"Chlorpheniramine, Codeine",Cough,"Drowsiness, habit-forming"
+28,Phensedyl,"Chlorpheniramine, Codeine",Cough,Sedation
+29,Delsym,Dextromethorphan,Cough,Nausea
+30,Zyrtec-D,"Cetirizine, Pseudoephedrine",Allergy/Cold,Insomnia
+31,Avil,Pheniramine Maleate,Allergy,Extreme Drowsiness
+32,Allegra 120,Fexofenadine,Allergy,Headache
+33,Cetirizine (Okacet),Cetirizine,Allergy,Mild sleepiness
+34,Levocet,Levocetirizine,Allergy,Fatigue
+35,Montair LC,"Montelukast, Levocetirizine",Asthma/Allergy,Headache
+36,Claritin,Loratadine,Allergy,Dry mouth
+37,Xyzal,Levocetirizine,Allergy,Drowsiness
+38,Astepro,Azelastine,Nasal Allergy,Bitter taste
+39,Flonase,Fluticasone,Nasal Allergy,Nosebleeds
+40,Nasacort,Triamcinolone,Nasal Allergy,Sore throat
+41,Digene,"Mg/Al Hydroxide, Simethicone",Antacid,Constipation
+42,Eno,Sodium Bicarbonate,Antacid,"Bloating, gas"
+43,Gelusil,"Magnesium, Aluminium",Antacid,Altered taste
+44,Pan 40,Pantoprazole,Acidity,Headache
+45,Omez,Omeprazole,Acidity,Diarrhea
+46,Zinetac,Ranitidine,Acidity,Stomach pain
+47,Pudin Hara,Mentha Piperita,Digestion,Heartburn
+48,Loperamide (Imodium),Loperamide,Diarrhea,Severe constipation
+49,Pepto-Bismol,Bismuth Subsalicylate,Stomach upset,Black tongue/stool
+50,Dulcolax,Bisacodyl,Laxative,Abdominal cramps
+51,Cremaffin,Milk of Magnesia,Laxative,Nausea
+52,Tums,Calcium Carbonate,Antacid,Constipation
+53,Nexium,Esomeprazole,Acidity,Dry mouth
+54,Pepcid,Famotidine,Acidity,Dizziness
+55,Gaviscon,Sodium Alginate,Heartburn,Bloating
+56,Betadine,Povidone-Iodine,Antiseptic,Skin irritation
+57,Volini Gel,Diclofenac Diethylamine,Pain Relief,Redness
+58,Candid Powder,Clotrimazole,Antifungal,Itching
+59,Moov,"Wintergreen Oil, Menthol",Pain Relief,Burning sensation
+60,Itaspor,Itraconazole,Antifungal,Dizziness
+61,Bactroban,Mupirocin,Antibiotic,Skin rash
+62,Canesten,Clotrimazole,Antifungal,Irritation
+63,Vicco Turmeric,"Turmeric, Sandalwood",Skincare,Generally safe
+64,Boroplus,Antiseptic Herbs,Skincare,Generally safe
+65,Dettol Liquid,Chloroxylenol,Antiseptic,Skin stinging
+66,Refresh Tears,Carboxymethylcellulose,Eye Drops,Blurry vision
+67,Itone,Herbal,Eye Drops,Stinging
+68,Ciplox Eye Drops,Ciprofloxacin,Eye Infection,Eye irritation
+69,Clearine,Naphazoline,Eye Redness,Rebound redness
+70,Waxsol,Docusate Sodium,Ear Wax,Ear irritation
+71,Otrivin Nasal,Xylometazoline,Nasal Decongestant,Nasal dryness
+72,Becosules,Vitamin B-Complex,Supplement,Yellow urine
+73,Shelcal 500,"Calcium, Vitamin D3",Supplement,Constipation
+74,Limcee,Vitamin C,Supplement,Acidity
+75,Zincovit,"Multivitamins, Zinc",Supplement,Metallic taste
+76,Revital H,"Ginseng, Vitamins",Supplement,Insomnia
+77,Evion 400,Vitamin E,Supplement,Fatigue
+78,Neurobion Forte,Vitamin B-Complex,Supplement,Nausea
+79,Seven Seas,Cod Liver Oil,Supplement,Fishy burps
+80,Calcimax,Calcium,Supplement,Bloating
+81,Ferium XT,"Iron, Folic Acid",Supplement,Dark stool
