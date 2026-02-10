@@ -1,4 +1,4 @@
-from App.Schema.MedAnalyzeSchema import MedAnalyzeResponse
+from app.schema.med_analyze_schema import MedAnalyzeResponse
 from fastapi import APIRouter, File, UploadFile
 
 router = APIRouter(prefix="/med_analyze", tags=["Med Analyze"])

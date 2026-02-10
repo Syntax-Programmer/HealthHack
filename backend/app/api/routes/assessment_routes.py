@@ -1,4 +1,4 @@
-from App.Schema.AssessmentSchema import (
+from app.schema.assessment_schema import (
     AssessmentHistory,
     AssessmentRecommendation,
     AssessmentRequest,

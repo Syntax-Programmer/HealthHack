@@ -116,6 +116,32 @@ class _AssessmentPageState extends State<AssessmentPage> {
               ],
             ),
           ),
+          // ⬅ Back button
+          Positioned(
+            top: 32,
+            left: 24,
+            child: TextButton.icon(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Color(0xFF2DE2C5),
+                size: 20,
+              ),
+              label: const Text(
+                "Back",
+                style: TextStyle(
+                  color: Color(0xFF2DE2C5),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              style: TextButton.styleFrom(
+                foregroundColor: const Color(0xFF2DE2C5),
+              ),
+            ),
+          ),
           // 📦 Main content
           Center(
             child: Padding(
@@ -123,6 +149,28 @@ class _AssessmentPageState extends State<AssessmentPage> {
               child: AnimatedSwitcher(
                 duration: const Duration(milliseconds: 500),
                 child: _buildCurrentState(),
+              ),
+            ),
+          ),
+          // ⚠️ Bottom disclaimer (outside the card)
+          Positioned(
+            bottom: 16,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: Container(
+                constraints: const BoxConstraints(maxWidth: 900),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: const Text(
+                  "Disclaimer: This assessment is for informational purposes only and may not be fully accurate. "
+                  "It is not a medical diagnosis. Always consult a qualified healthcare professional.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 12,
+                    height: 1.4,
+                    color: Color(0xFF9AA4AE),
+                  ),
+                ),
               ),
             ),
           ),
