@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../widgets/symptom_chip.dart';
 import '../widgets/primary_button.dart';
 import '../widgets/thinking_indicator.dart';
+import '../api/assessment_api.dart';
 import 'models.dart';
 
 class AssessmentPage extends StatefulWidget {
@@ -47,27 +48,29 @@ class _AssessmentPageState extends State<AssessmentPage> {
     ],
   };
 
-  void _startAssessment() {
+  void _startAssessment() async {
     setState(() {
       _state = AssessmentState.thinking;
     });
 
-    // Simulate backend / ML delay
-    Timer(const Duration(seconds: 2), () {
-      final severe = _selectedSymptoms.contains("Chest Pain") ||
-          _selectedSymptoms.contains("Breathlessness");
+    try {
+      final response = await AssessmentApi.assess(
+        age: 22, // later from user profile
+        gender: "Male",
+        symptoms: _selectedSymptoms.toList(),
+      );
 
       setState(() {
-        _result = AssessmentResult(
-          severity: severe ? "High" : "Low",
-          message: severe
-              ? "We strongly recommend visiting a doctor."
-              : "Over-the-counter medication should be sufficient.",
-          doctorRequired: severe,
-        );
+        _result = AssessmentResult.fromJson(response);
         _state = AssessmentState.result;
       });
-    });
+    } catch (e) {
+      debugPrint("Assessment error: $e");
+      setState(() {
+        _result = null;
+        _state = AssessmentState.result;
+      });
+    }
   }
 
   @override
@@ -368,8 +371,19 @@ class _AssessmentPageState extends State<AssessmentPage> {
   }
 
   Widget _buildResult() {
+    if (_result == null) {
+      return _buildError();
+    }
+
+    final severityColor = _result!.severity >= 70
+        ? Colors.redAccent
+        : _result!.severity >= 40
+            ? Colors.orangeAccent
+            : Colors.greenAccent;
+
     return Card(
       elevation: 20,
+      color: const Color(0xFF121821),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(24),
       ),
@@ -378,33 +392,112 @@ class _AssessmentPageState extends State<AssessmentPage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              _result!.doctorRequired
-                  ? Icons.warning_amber
-                  : Icons.check_circle,
-              size: 80,
-              color: _result!.doctorRequired ? Colors.red : Colors.green,
-            ),
+            Icon(Icons.health_and_safety,
+                size: 80, color: severityColor),
+
             const SizedBox(height: 20),
+
             Text(
-              "Severity: ${_result!.severity}",
-              style: const TextStyle(
+              "Severity: ${_result!.severity}%",
+              style: TextStyle(
                 fontSize: 26,
                 fontWeight: FontWeight.bold,
+                color: severityColor,
               ),
             ),
-            const SizedBox(height: 12),
+
+            const SizedBox(height: 8),
+
             Text(
-              _result!.message,
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 18),
+              "Doctor Visit Likelihood: ${_result!.docRange}%",
+              style: const TextStyle(
+                fontSize: 16,
+                color: Color(0xFF9AA4AE),
+              ),
             ),
+
+            const SizedBox(height: 20),
+
+            Text(
+              _result!.advice,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 18,
+                color: Colors.white,
+              ),
+            ),
+
+            const SizedBox(height: 24),
+
+            if (_result!.suggestedMeds.isNotEmpty) ...[
+              const Text(
+                "Suggested Medicines",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Color(0xFF2DE2C5),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 12),
+              Wrap(
+                spacing: 8,
+                children: _result!.suggestedMeds.map((med) {
+                  return Chip(
+                    label: Text(med),
+                    backgroundColor:
+                        const Color(0xFF2DE2C5).withOpacity(0.2),
+                  );
+                }).toList(),
+              ),
+            ],
+
             const SizedBox(height: 32),
+
             PrimaryButton(
               text: "Start Over",
               onPressed: () {
                 setState(() {
                   _selectedSymptoms.clear();
+                  _state = AssessmentState.selecting;
+                });
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  Widget _buildError() {
+    return Card(
+      color: const Color(0xFF121821),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(24),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(40),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(Icons.error, color: Colors.red, size: 64),
+            const SizedBox(height: 16),
+            const Text(
+              "Severity: Error",
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              "Failed to connect to the server.",
+              style: TextStyle(color: Color(0xFF9AA4AE)),
+            ),
+            const SizedBox(height: 24),
+            PrimaryButton(
+              text: "Start Over",
+              onPressed: () {
+                setState(() {
                   _state = AssessmentState.selecting;
                 });
               },

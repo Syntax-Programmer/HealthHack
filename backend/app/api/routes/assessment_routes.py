@@ -17,9 +17,9 @@ def assessment_history():
 @router.post("/ask", response_model=AssessmentRecommendation)
 def AssessmentAsk(request: AssessmentRequest):
     return {
-        "advice": "dummy advice",
-        "suggested_meds": ["s", "sd"],
-        "doc_range": 34,
-        "severity": 23,
+        "advice": "dummy advice dummy advicedummy advicedummy advicedummy advicedummy advicedummy advicedummy advicedummy advice",
+        "suggested_meds": ["s", "sd", "ds", "efwse", "eff we", "wefwef"],
+        "doc_range": 100,
+        "severity": 10,
     }
     # run the model and return the output.
