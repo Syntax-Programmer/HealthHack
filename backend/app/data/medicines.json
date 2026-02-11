@@ -1,0 +1,40 @@
+{
+  "paracetamol": {
+    "medicine_name": "Paracetamol",
+    "salts": ["Paracetamol"],
+    "uses": ["Fever", "Pain relief"],
+    "side_effects": ["Nausea", "Liver toxicity (high dose)"],
+    "warnings": [
+      "Avoid alcohol",
+      "Do not exceed recommended dose"
+    ],
+    "dosage_info": "Typically 500–650 mg every 6–8 hours for adults",
+    "category": "OTC"
+  },
+
+  "ibuprofen": {
+    "medicine_name": "Ibuprofen",
+    "salts": ["Ibuprofen"],
+    "uses": ["Pain", "Inflammation"],
+    "side_effects": ["Stomach pain", "Heartburn"],
+    "warnings": [
+      "Avoid on empty stomach",
+      "Not recommended for people with ulcers"
+    ],
+    "dosage_info": "200–400 mg every 6–8 hours",
+    "category": "OTC"
+  },
+
+  "amoxicillin": {
+    "medicine_name": "Amoxicillin",
+    "salts": ["Amoxicillin"],
+    "uses": ["Bacterial infections"],
+    "side_effects": ["Diarrhea", "Allergic reactions"],
+    "warnings": [
+      "Prescription only",
+      "Complete the full course"
+    ],
+    "dosage_info": null,
+    "category": "Prescription"
+  }
+}

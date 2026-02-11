@@ -6,3 +6,4 @@ python-multipart
 numpy
 pandas
 scikit-learn
+tensorflow==2.15.*

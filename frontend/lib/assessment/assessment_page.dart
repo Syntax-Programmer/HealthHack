@@ -18,33 +18,94 @@ class _AssessmentPageState extends State<AssessmentPage> {
   final Set<String> _selectedSymptoms = {};
   AssessmentResult? _result;
 
-  final Map<String, List<String>> symptomCategories = {
+  final Map<String, List<Map<String, String>>> symptomCategories = {
     "General": [
-      "Fever",
-      "Fatigue",
-      "Chills",
-      "Body Ache",
-      "Weakness",
+      {"key": "fever", "label": "Fever"},
+      {"key": "fatigue", "label": "Fatigue"},
+      {"key": "chills", "label": "Chills"},
+      {"key": "weakness", "label": "Weakness"},
+      {"key": "loss_of_appetite", "label": "Loss of Appetite"},
+      {"key": "sleep_disturbance", "label": "Sleep Disturbance"},
     ],
-    "Respiratory": [
-      "Cough",
-      "Chest Pain",
-      "Breathlessness",
-      "Sore Throat",
-      "Runny Nose",
-    ],
+
     "Neurological": [
-      "Headache",
-      "Dizziness",
-      "Confusion",
-      "Blurred Vision",
+      {"key": "headache", "label": "Headache"},
+      {"key": "dizziness", "label": "Dizziness"},
+      {"key": "confusion", "label": "Confusion"},
+      {"key": "fainting", "label": "Fainting"},
+      {
+        "key": "difficulty_concentrating",
+        "label": "Difficulty Concentrating"
+      },
+      {"key": "blurred_vision", "label": "Blurred Vision"},
+      {"key": "eye_pain", "label": "Eye Pain"},
+      {"key": "light_sensitivity", "label": "Light Sensitivity"},
     ],
+
+    "Respiratory & Chest": [
+      {"key": "cough", "label": "Cough"},
+      {
+        "key": "shortness_of_breath",
+        "label": "Breathlessness"
+      },
+      {"key": "chest_tightness", "label": "Chest Tightness"},
+      {"key": "wheezing", "label": "Wheezing"},
+      {"key": "sore_throat", "label": "Sore Throat"},
+      {"key": "chest_pain", "label": "Chest Pain"},
+      {"key": "palpitations", "label": "Heart Palpitations"},
+      {"key": "leg_swelling", "label": "Leg Swelling"},
+    ],
+
     "Gastrointestinal": [
-      "Nausea",
-      "Vomiting",
-      "Diarrhea",
-      "Abdominal Pain",
-      "Loss of Appetite",
+      {"key": "nausea", "label": "Nausea"},
+      {"key": "vomiting", "label": "Vomiting"},
+      {"key": "diarrhea", "label": "Diarrhea"},
+      {"key": "abdominal_pain", "label": "Abdominal Pain"},
+      {"key": "bloating", "label": "Bloating"},
+      {"key": "acid_reflux", "label": "Acid Reflux"},
+    ],
+
+    "Musculoskeletal": [
+      {"key": "muscle_pain", "label": "Muscle Pain"},
+      {"key": "joint_pain", "label": "Joint Pain"},
+      {"key": "back_pain", "label": "Back Pain"},
+    ],
+
+    "ENT (Ear, Nose, Throat)": [
+      {"key": "runny_nose", "label": "Runny Nose"},
+      {"key": "nasal_congestion", "label": "Nasal Congestion"},
+      {
+        "key": "loss_of_taste_smell",
+        "label": "Loss of Taste / Smell"
+      },
+      {"key": "ear_pain", "label": "Ear Pain"},
+    ],
+
+    "Skin & Allergies": [
+      {"key": "skin_rash", "label": "Skin Rash"},
+      {"key": "itching", "label": "Itching"},
+      {"key": "swelling", "label": "Swelling"},
+      {"key": "redness", "label": "Redness"},
+    ],
+
+    "Urinary": [
+      {
+        "key": "frequent_urination",
+        "label": "Frequent Urination"
+      },
+      {
+        "key": "painful_urination",
+        "label": "Painful Urination"
+      },
+      {
+        "key": "burning_sensation",
+        "label": "Burning Sensation"
+      },
+    ],
+
+    "Mental Health": [
+      {"key": "anxiety", "label": "Anxiety"},
+      {"key": "low_mood", "label": "Low Mood"},
     ],
   };
 
@@ -55,9 +116,7 @@ class _AssessmentPageState extends State<AssessmentPage> {
 
     try {
       final response = await AssessmentApi.assess(
-        age: 22, // later from user profile
-        gender: "Male",
-        symptoms: _selectedSymptoms.toList(),
+        _selectedSymptoms.toList(),
       );
 
       setState(() {
@@ -330,15 +389,17 @@ class _AssessmentPageState extends State<AssessmentPage> {
                                     spacing: 12,
                                     runSpacing: 12,
                                     children: items.map((symptom) {
+                                      final key = symptom["key"]!;
+                                      final label = symptom["label"]!;
+
                                       return SymptomChip(
-                                        label: symptom,
-                                        selected:
-                                            _selectedSymptoms.contains(symptom),
+                                        label: label,
+                                        selected: _selectedSymptoms.contains(key),
                                         onTap: () {
                                           setState(() {
-                                            _selectedSymptoms.contains(symptom)
-                                                ? _selectedSymptoms.remove(symptom)
-                                                : _selectedSymptoms.add(symptom);
+                                            _selectedSymptoms.contains(key)
+                                                ? _selectedSymptoms.remove(key)
+                                                : _selectedSymptoms.add(key);
                                           });
                                         },
                                       );
@@ -368,6 +429,14 @@ class _AssessmentPageState extends State<AssessmentPage> {
         ),
       ),
     );
+  }
+
+  void _resetAssessment() {
+    setState(() {
+      _selectedSymptoms.clear();
+      _result = null;
+      _state = AssessmentState.selecting;
+    });
   }
 
   Widget _buildResult() {
@@ -455,12 +524,7 @@ class _AssessmentPageState extends State<AssessmentPage> {
 
             PrimaryButton(
               text: "Start Over",
-              onPressed: () {
-                setState(() {
-                  _selectedSymptoms.clear();
-                  _state = AssessmentState.selecting;
-                });
-              },
+              onPressed: _resetAssessment,
             ),
           ],
         ),
@@ -496,11 +560,7 @@ class _AssessmentPageState extends State<AssessmentPage> {
             const SizedBox(height: 24),
             PrimaryButton(
               text: "Start Over",
-              onPressed: () {
-                setState(() {
-                  _state = AssessmentState.selecting;
-                });
-              },
+              onPressed: _resetAssessment,
             ),
           ],
         ),

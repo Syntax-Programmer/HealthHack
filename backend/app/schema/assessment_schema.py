@@ -4,8 +4,6 @@ from pydantic import BaseModel
 
 
 class AssessmentRequest(BaseModel):
-    age: int
-    gender: Literal["Male", "Female", "Other", "Perfer Not To Say"]
     symptoms: list[str]
 
 

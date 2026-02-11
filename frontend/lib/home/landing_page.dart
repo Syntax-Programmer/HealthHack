@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../assessment/assessment_page.dart';
 import '../navigation/animated_routes.dart';
+import '../medicine/medicine_page.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
@@ -43,18 +44,6 @@ class LandingPage extends StatelessWidget {
                 const _NavItem("Check"),
                 const _NavItem("About"),
                 const SizedBox(width: 20),
-                OutlinedButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(Icons.camera_alt, size: 18),
-                  label: const Text("Scan Medicine"),
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: const Color(0xFF2DE2C5),
-                    side: const BorderSide(color: Color(0xFF2DE2C5)),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                ),
               ],
             ),
           ),
@@ -122,10 +111,10 @@ class LandingPage extends StatelessWidget {
 
                 const SizedBox(height: 40),
 
-                // 🔘 CTA buttons
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    // ✅ Start Safety Check
                     ElevatedButton(
                       onPressed: () {
                         Navigator.of(context).push(
@@ -147,6 +136,43 @@ class LandingPage extends StatelessWidget {
                         children: [
                           Text(
                             "Start Safety Check",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(width: 8),
+                          Icon(Icons.arrow_forward),
+                        ],
+                      ),
+                    ),
+
+                    const SizedBox(width: 16),
+
+                    // ✅ Scan Medicine (same style)
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          poppyRoute(const ScanMedicinePage()),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF2DE2C5),
+                        foregroundColor: Colors.black,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 32,
+                          vertical: 18,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                      ),
+                      child: const Row(
+                        children: [
+                          Icon(Icons.camera_alt),
+                          SizedBox(width: 8),
+                          Text(
+                            "Scan Medicine",
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,

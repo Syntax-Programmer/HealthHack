@@ -3,6 +3,7 @@ from app.schema.assessment_schema import (
     AssessmentRecommendation,
     AssessmentRequest,
 )
+from app.services.assessment_service import AssessmentService
 from fastapi import APIRouter
 
 router = APIRouter(prefix="/assessment", tags=["Assessment"])
@@ -15,11 +16,6 @@ def assessment_history():
 
 
 @router.post("/ask", response_model=AssessmentRecommendation)
-def AssessmentAsk(request: AssessmentRequest):
-    return {
-        "advice": "dummy advice dummy advicedummy advicedummy advicedummy advicedummy advicedummy advicedummy advicedummy advice",
-        "suggested_meds": ["s", "sd", "ds", "efwse", "eff we", "wefwef"],
-        "doc_range": 100,
-        "severity": 10,
-    }
+def assessment_ask(request: AssessmentRequest):
+    return AssessmentService.assess(symptoms=request.symptoms)
     # run the model and return the output.
