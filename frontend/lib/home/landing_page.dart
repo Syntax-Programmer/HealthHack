@@ -149,6 +149,21 @@ class _LandingPageState extends State<LandingPage> {
                                 color: Color(0xFF2DE2C5),
                               ),
                             ),
+                            const SizedBox(height: 20),
+
+                            const SizedBox(
+                              width: 650,
+                              child: Text(
+                                "AI-powered medical safety assistant that analyzes symptoms and medicines "
+                                "before you make a health decision.",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  height: 1.6,
+                                  color: Color(0xFFB3C0CC),
+                                ),
+                              ),
+                            ),
 
                             const SizedBox(height: 40),
 
@@ -252,7 +267,36 @@ class _LandingPageState extends State<LandingPage> {
                       ),
                     ),
 
-                    const SizedBox(height: 100),
+                    //const SizedBox(height: 100),
+                    const SizedBox(height: 40),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _MiniStat(label: "AI-Powered"),
+                        SizedBox(width: 40),
+                        _MiniStat(label: "Privacy First"),
+                        SizedBox(width: 40),
+                        _MiniStat(label: "Risk-Focused"),
+                      ],
+                    ),
+
+                    const SizedBox(height: 30),
+
+                    Column(
+                      children: const [
+                        Icon(Icons.keyboard_arrow_down,
+                            color: Colors.white38, size: 28),
+                        Text(
+                          "Learn More",
+                          style: TextStyle(
+                            color: Colors.white38,
+                            fontSize: 12,
+                          ),
+                        )
+                      ],
+                    ),
+
                   ],
                 ),
               ),
@@ -403,6 +447,22 @@ class _PrimaryCTA extends StatelessWidget {
           const SizedBox(width: 8),
           const Icon(Icons.arrow_forward),
         ],
+      ),
+    );
+  }
+}
+class _MiniStat extends StatelessWidget {
+  final String label;
+  const _MiniStat({required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      label,
+      style: const TextStyle(
+        fontSize: 14,
+        color: Colors.white54,
+        letterSpacing: 1,
       ),
     );
   }
