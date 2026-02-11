@@ -8,14 +8,14 @@ router = APIRouter(prefix="/med_analyze", tags=["Med Analyze"])
 @router.post("/analyze", response_model=MedAnalyzeResponse)
 def med_analyze(image: UploadFile = File(...)):
     # TEMP: verify upload works
-    contents = file.file.read()
+    contents = image.file.read()
 
     return MedAnalyzeResponse(
         medicine_name="Unknown",
-        salts=[],
-        uses=[],
-        side_effects=[],
-        warnings=[],
+        salts=["x", "r3"],
+        uses=["fwef", "wrwe"],
+        side_effects=["efwe"],
+        warnings=["efe"],
         category="Unknown",
         confidence=0,
     )

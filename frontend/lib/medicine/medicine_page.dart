@@ -1,6 +1,9 @@
 import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
 
 class ScanMedicinePage extends StatelessWidget {
   const ScanMedicinePage({super.key});
@@ -83,25 +86,55 @@ class ScanMedicinePage extends StatelessWidget {
                 ElevatedButton.icon(
                     onPressed: () async {
                       final result = await FilePicker.platform.pickFiles(
-                        type: FileType.image, // ✅ images only
+                        type: FileType.image,
                         allowMultiple: false,
-                        withData: true, // ✅ required for web (bytes)
+                        withData: true,
                       );
 
-                      if (result == null) {
-                        // User cancelled picker
-                        return;
-                      }
+                      if (result == null) return;
 
-                      final PlatformFile file = result.files.first;
+                      final file = result.files.first;
 
-                      // Safety check
                       if (file.bytes == null) {
-                        debugPrint("Failed to read image bytes");
+                        debugPrint("No image bytes");
                         return;
                       }
-                      // 🔜 NEXT STEP (later):
-                      // Send imageBytes to backend OCR / med_analyze endpoint
+
+                      try {
+                        var request = http.MultipartRequest(
+                          "POST",
+                          Uri.parse("http://localhost:8000/med_analyze/analyze"),
+                        );
+
+                        request.files.add(
+                          http.MultipartFile.fromBytes(
+                            "image", // MUST match backend param name
+                            file.bytes!,
+                            filename: file.name,
+                          ),
+                        );
+
+                        var streamedResponse = await request.send();
+                        var response = await http.Response.fromStream(streamedResponse);
+
+                        if (response.statusCode == 200) {
+                          final data = jsonDecode(response.body);
+
+                          debugPrint("Medicine: ${data["medicine_name"]}");
+
+                          showDialog(
+                            context: context,
+                            builder: (_) => AlertDialog(
+                              title: Text(data["medicine_name"]),
+                              content: Text("Confidence: ${data["confidence"]}%"),
+                            ),
+                          );
+                        } else {
+                          debugPrint("Backend error: ${response.body}");
+                        }
+                      } catch (e) {
+                        debugPrint("Upload error: $e");
+                      }
                     },
                   icon: const Icon(Icons.camera_alt),
                   label: const Text("Select Picture"),
